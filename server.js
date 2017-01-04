@@ -17,20 +17,27 @@
 // Our dependencies (modules)
 var http = require('http');
 var express = require('express');
-// @TODO: <Problem 2> you should add the messages module here. 
+
+var messages = require('./messages');
 
 // initialize the app using express
 var app = express();
 
-// this is our first app route using Express.js. This will route the the root url that
-// you are serving. For example, if you are serving on http://localhost:8080, this url
-// will be located at http://localhost:8080/
-app.get('/', function(req, res) {
+function addRouteMessage(route, message) {
 
-	// @TODO: <Problem 2> Update your hard coded text into the correct module object
-	res.write('If you see this, your route is working!'); // write something to standard output
-	res.end();	// end the event
-});
+	// this is our first app route using Express.js. This will route the the root url that
+	// you are serving. For example, if you are serving on http://localhost:8080, this url
+	// will be located at http://localhost:8080/
+	app.get(route, function(req, res) {
+		res.write(message); // write something to standard output
+		res.end();	// end the event
+	});
+}
+
+addRouteMessage('/', messages.home);
+addRouteMessage('/about', messages.about);
+addRouteMessage('/contact', messages.contact);
+
 
 // @TODO: <Problem 1> you should add your new routes here. 
 // @PROTIP: remember to look at the route I provided above!
